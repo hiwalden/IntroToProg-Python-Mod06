@@ -31,6 +31,8 @@ class IO:
     def output_error_messages(message: str, error: Exception = None):
         """
         This function displays a technical error message if an exception is raised.
+        Change Log:
+        WMarcus, 3/2/25, Created Function
         """
         print(message, end="\n\n")
         if error is not None:
@@ -41,6 +43,8 @@ class IO:
     def output_menu(menu:str):
         """
         This function prints the MENU constant.
+        Change Log:
+        WMarcus, 3/2/25, Created Function
         """
         global MENU
         print(MENU)
@@ -50,6 +54,8 @@ class IO:
         """
         This function receives the user's choice from MENU, and addresses invalid choices.
         return: string with user choice
+        Change Log:
+        WMarcus, 3/2/25, Created Function
         """
         global menu_choice
         try:
@@ -65,6 +71,8 @@ class IO:
     def output_student_courses(student_data:list):
         """
         This function displays all the student data, whether saved to file or awaiting writing to file.
+        Change Log:
+        WMarcus, 3/2/25, Created Function
         """
         global students
         print("-" * 50)
@@ -78,6 +86,8 @@ class IO:
         """
         This function requests and receives user input about student registration.
         return: A nested list containing user input
+        Change Log:
+        WMarcus, 3/2/25, Created Function
         """
         student_first_name: str = ''  # Holds the first name of a student entered by the user.
         student_last_name: str = ''  # Holds the last name of a student entered by the user.
@@ -110,6 +120,8 @@ class FileProcessor:
         """
         This function reads data from the JSON file into a list of dictionary rows.
         return: A list of dictionaries
+        Change Log:
+        WMarcus, 3/2/25, Created Function
         """
         try:
             file = open(FILE_NAME, "r")
@@ -128,6 +140,8 @@ class FileProcessor:
     def write_data_to_file(file_name:str, student_data:list):
         """
         This function writes a list of dictionaries to a JSON, then prints the data that was written.
+        Change Log:
+        WMarcus, 3/2/25, Created Function
         """
         json_data: str = ''  # Holds combined string data in a json format.
         file = None  # Holds a reference to an opened file.
