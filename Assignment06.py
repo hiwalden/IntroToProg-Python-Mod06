@@ -4,7 +4,7 @@
 # with structured error handling
 # Change Log: (Who, When, What)
 #   WMarcus, 3/2/25, Created Script
-#   WMarcus, 3/4/25, Understood Paramters (At Long Last)
+#   WMarcus, 3/4/25, Understood Parameters (At Long Last)
 # ------------------------------------------------------------------------------------------ #
 
 #PACKAGES -------
