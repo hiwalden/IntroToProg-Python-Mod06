@@ -23,8 +23,8 @@ MENU: str = '''
 FILE_NAME: str = "Enrollments.json"
 
 # VARIABLES --------
-menu_choice: str  # Hold the choice made by the user.
-students: list = []  # a table of student data
+menu_choice: str  #holds user choice from MENU
+students: list = [] #list of dictionaries containing student registration information
 
 #PRESENTATION --------
 class IO:
@@ -41,9 +41,9 @@ class IO:
             print(error, error.__doc__, type(error), sep='\n')
 
     @staticmethod
-    def output_menu(menu: str):
+    def output_menu(menu: str): 
         """
-        This function prints the MENU constant.
+        This function prints the data passed through its parameter.
         Change Log:
         WMarcus, 3/2/25, Created Function
         """
@@ -88,18 +88,18 @@ class IO:
         Change Log:
         WMarcus, 3/2/25, Created Function
         """
-        student_first_name: str = ''  # Holds the first name of a student entered by the user.
-        student_last_name: str = ''  # Holds the last name of a student entered by the user.
-        course_name: str = ''  # Holds the name of a course entered by the user.
-        student_data: dict = {}  # one row of student data
+        student_first_name: str = '' 
+        student_last_name: str = '' 
+        course_name: str = ''  
+        student_data: dict = {}  
         global students
         try:
             student_first_name = input("Enter the student's first name: ")
             if not student_first_name.isalpha():
-                raise ValueError("No student name may contain numbers or characters")
+                raise ValueError()
             student_last_name = input("Enter the student's last name: ")
             if not student_last_name.isalpha():
-                raise ValueError("No student name may contain numbers or characters.")
+                raise ValueError()
             course_name = input("Please enter the name of the course: ")
             student_data = {"FirstName": student_first_name,
                             "LastName": student_last_name,
@@ -107,9 +107,11 @@ class IO:
             students.append(student_data)
             print(f"You have registered {student_first_name} {student_last_name} for {course_name}.")
         except ValueError as e:
-            IO.output_error_messages("Please re-attempt information entry.", e)
+            IO.output_error_messages("Your entry has been rejected. \
+            Student names may only contain letters.", e)
         except Exception as e:
-            IO.output_error_messages("There was a non-specific error!", e)
+            IO.output_error_messages("Your entry has been rejected. \
+            Student names may only contain letters.", e)
         return student_data
 
 #DATA STORAGE -------
