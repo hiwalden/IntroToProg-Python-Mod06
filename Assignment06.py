@@ -4,6 +4,7 @@
 # with structured error handling
 # Change Log: (Who, When, What)
 #   WMarcus, 3/2/25, Created Script
+#   WMarcus, 3/4/25, Understood Paramters (At Long Last)
 # ------------------------------------------------------------------------------------------ #
 
 #PACKAGES -------
@@ -40,14 +41,13 @@ class IO:
             print(error, error.__doc__, type(error), sep='\n')
 
     @staticmethod
-    def output_menu(menu:str):
+    def output_menu(menu: str):
         """
         This function prints the MENU constant.
         Change Log:
         WMarcus, 3/2/25, Created Function
         """
-        global MENU
-        print(MENU)
+        print(menu)
 
     @staticmethod
     def input_menu_choice():
@@ -68,15 +68,14 @@ class IO:
         return menu_choice
 
     @staticmethod
-    def output_student_courses(student_data:list):
+    def output_student_courses(student_data: list):
         """
         This function displays all the student data, whether saved to file or awaiting writing to file.
         Change Log:
         WMarcus, 3/2/25, Created Function
         """
-        global students
         print("-" * 50)
-        for student in students:
+        for student in student_data:
             print(f'Student {student["FirstName"]} '
                 f'{student["LastName"]} is enrolled in {student["CourseName"]}')
             print("-" * 50)
@@ -111,7 +110,7 @@ class IO:
             IO.output_error_messages("Please re-attempt information entry.", e)
         except Exception as e:
             IO.output_error_messages("There was a non-specific error!", e)
-        return students
+        return student_data
 
 #DATA STORAGE -------
 class FileProcessor:
@@ -123,8 +122,9 @@ class FileProcessor:
         Change Log:
         WMarcus, 3/2/25, Created Function
         """
+        global students
         try:
-            file = open(FILE_NAME, "r")
+            file = open(file_name, "r")
             student_data = json.load(file)
             file.close()
         except FileNotFoundError as e:
@@ -132,7 +132,7 @@ class FileProcessor:
         except Exception as e:
             IO.output_error_messages("There was a non-specific error!", e)
         finally:
-            if file.closed == False:
+            if not file.closed:
                 file.close()
         return student_data
 
@@ -143,23 +143,21 @@ class FileProcessor:
         Change Log:
         WMarcus, 3/2/25, Created Function
         """
-        json_data: str = ''  # Holds combined string data in a json format.
         file = None  # Holds a reference to an opened file.
         global students
         try:
-            file = open(FILE_NAME, "w")
-            json.dump(students, file)
-
+            file = open(file_name, "w")
+            json.dump(student_data, file)
             file.close()
             print("The following data was saved to file!")
-            for student in students:
+            for student in student_data:
                 print(f'Student {student["FirstName"]} {student["LastName"]} is enrolled in {student["CourseName"]}')
         except FileNotFoundError as e:
                 IO.output_error_messages("Text file must exist before running this script!", e)
         except Exception as e:
             IO.output_error_messages("There was a non-specific error!", e)
         finally:
-            if file.closed == False:
+            if not file.closed:
                 file.close()
 
 #LOGIC---------
